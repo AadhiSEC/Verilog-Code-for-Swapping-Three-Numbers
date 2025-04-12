@@ -1,11 +1,13 @@
 # Verilog-Code-for-Swapping-Three-Numbers
-Aim
+## AADHITHYA SV
+## 212223060001
+## Aim
 To design and simulate a Verilog HDL code for swapping the values of three numbers without using any temporary variables, and verify the correctness of the swapping operation through a testbench using the Vivado 2023.1 simulation environment.
 
-Apparatus Required
+## Apparatus Required
 Vivado 2023.1 or equivalent Verilog simulation tool.
 
-Procedure
+## Procedure
 Launch Vivado 2023.1:
 
 Open Vivado and create a new project.
@@ -28,31 +30,74 @@ Save and Document Results:
 
 Capture the waveform output and include the results in your report for verification.
 
-Verilog Code:
-
-// swap_three_numbers.v
-module swap_three_numbers (
-    input wire [7:0] a_in,
-    input wire [7:0] b_in,
-    input wire [7:0] c_in,
-    output reg [7:0] a_out,
-    output reg [7:0] b_out,
-    output reg [7:0] c_out
-);
-    always @(*) begin
-        a_out = b_in; // Swap: a = b
-        b_out = c_in; // Swap: b = c
-        c_out = a_in; // Swap: c = a
-    end
+## Verilog Code:
+### By Blocking (3 Variables)
+```
+`timescale 1ns / 1ps
+module swap3block;
+reg [3:0]a,b,c;
+initial begin
+a=4'd10;
+b=4'd12;
+c=4'd14;
+a=b;
+b=c;
+c=a;
+end
+endmodule
+```
+### By Non-Blocking(3 Variables)
+```
+`timescale 1ns / 1ps
+module nonblock(a,b,c);
+output reg [3:0]a,b,c;
+initial 
+begin
+a=4'd12;
+b=4'd14;
+c=4'd15;
+a<=b;
+b<=c;
+c<=a;
+end 
 endmodule
 
+```
+### By Blocking (2 variable)
+```
+`timescale 1ns / 1ps
+module swap2block;
+reg [3:0]a,b;
+initial begin
+a=4'd10;
+b=4'd12;
+a=b;
+b=a;
+end
+endmodule
 
-Testbench for Swapping Three Numbers:
+```
+### By Non-Blocking (Using same variable)
+```
+`Timescale 1ns / 1ps
+module swap2nonblock;
+reg [3:0]a,b;
+initial 
+begin
+a=4'd12;
+b=4'd14;
+a<=b;
+b<=a;
+end 
+endmodule
+```
+## Testbench for Swapping Three Numbers:
 
 // swap_three_numbers_tb.v
+```
 `timescale 1ns / 1ps
 
-module swap_three_numbers_tb;
+module swap3block_tb;
 
     // Inputs
     reg [7:0] a;
@@ -93,6 +138,19 @@ module swap_three_numbers_tb;
         #10 $stop;
     end
 endmodule
+```
+## OUTPUT
+### By Blocking ( 3 Variables)
+![WhatsApp Image 2025-04-12 at 14 33 41_dab37ed4](https://github.com/user-attachments/assets/bd991413-b754-48aa-8901-7958bbb0032d)
 
-Conclusion
+### By Non-Blocking  ( 3 Variables)
+![WhatsApp Image 2025-04-12 at 14 21 08_1acd4517](https://github.com/user-attachments/assets/55adce0c-9142-45a5-8660-771bd892fb75)
+
+### By Blocking( 2 variable)
+![WhatsApp Image 2025-04-12 at 14 37 23_330339b0](https://github.com/user-attachments/assets/1948a661-ecd8-4250-b272-a0d8bb11c4b6)
+
+### By Non Blocking(2 variable)
+![WhatsApp Image 2025-04-12 at 14 46 38_6481c1db](https://github.com/user-attachments/assets/a288db0d-36e4-4adf-9de6-62a6b325d897)
+
+## Conclusion
 In this experiment, a Verilog HDL code for swapping three numbers was designed and successfully simulated. The testbench verified the swapping operation, showing that the values of three input numbers (a, b, and c) were swapped correctly without the use of temporary variables. This experiment demonstrated the effectiveness of Verilog in implementing logical operations and control mechanisms such as swapping values. The simulation results confirm the correct functionality of the design.
