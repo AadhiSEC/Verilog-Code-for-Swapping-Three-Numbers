@@ -40,22 +40,32 @@ initial begin
 a=4'd10;
 b=4'd12;
 c=4'd14;
+end
+always @(*)
+begin
 a=b;
 b=c;
 c=a;
 end
 endmodule
 ```
+### Output
+### By Blocking ( 3 Variables)
+![WhatsApp Image 2025-04-12 at 14 33 41_dab37ed4](https://github.com/user-attachments/assets/bd991413-b754-48aa-8901-7958bbb0032d)
 ### By Non-Blocking(3 Variables)
 ```
 `timescale 1ns / 1ps
-module nonblock(a,b,c);
+module nonblock(a,b,c,clk);
+input clk;
 output reg [3:0]a,b,c;
 initial 
 begin
 a=4'd12;
 b=4'd14;
 c=4'd15;
+end
+always @(posedge clk)
+begin
 a<=b;
 b<=c;
 c<=a;
@@ -63,6 +73,10 @@ end
 endmodule
 
 ```
+### Output
+### By Non-Blocking  ( 3 Variables)
+![image](https://github.com/user-attachments/assets/89aa7cf3-0d1e-4a85-8b98-5601ddf770c6)
+
 ### By Blocking (2 variable)
 ```
 `timescale 1ns / 1ps
@@ -71,26 +85,42 @@ reg [3:0]a,b;
 initial begin
 a=4'd10;
 b=4'd12;
+end
+always @(*)
+begin
 a=b;
 b=a;
 end
 endmodule
 
 ```
-### By Non-Blocking (Using same variable)
+### Output
+### By Blocking( 2 variable)
+![image](https://github.com/user-attachments/assets/37dec5da-78e0-4637-832b-046c754cd63a)
+
+### By Non-Blocking (2 Variable)
 ```
 `Timescale 1ns / 1ps
-module swap2nonblock;
-reg [3:0]a,b;
+module swap2nonblock(a,b,clk);
+input clk;
+output reg [3:0]a,b;
 initial 
 begin
 a=4'd12;
 b=4'd14;
+end
+always @(posedge clk)
+begin
 a<=b;
 b<=a;
 end 
 endmodule
 ```
+## OUTPUT
+
+### By Non Blocking(2 variable)
+![image](https://github.com/user-attachments/assets/98886ae5-ecf5-45b7-bf7e-2269fde0b40f)
+
 ## Testbench for Swapping Three Numbers:
 
 // swap_three_numbers_tb.v
@@ -139,18 +169,7 @@ module swap3block_tb;
     end
 endmodule
 ```
-## OUTPUT
-### By Blocking ( 3 Variables)
-![WhatsApp Image 2025-04-12 at 14 33 41_dab37ed4](https://github.com/user-attachments/assets/bd991413-b754-48aa-8901-7958bbb0032d)
 
-### By Non-Blocking  ( 3 Variables)
-![WhatsApp Image 2025-04-12 at 14 21 08_1acd4517](https://github.com/user-attachments/assets/55adce0c-9142-45a5-8660-771bd892fb75)
-
-### By Blocking( 2 variable)
-![WhatsApp Image 2025-04-12 at 14 37 23_330339b0](https://github.com/user-attachments/assets/1948a661-ecd8-4250-b272-a0d8bb11c4b6)
-
-### By Non Blocking(2 variable)
-![WhatsApp Image 2025-04-12 at 14 46 38_6481c1db](https://github.com/user-attachments/assets/a288db0d-36e4-4adf-9de6-62a6b325d897)
 
 ## Conclusion
 In this experiment, a Verilog HDL code for swapping three numbers was designed and successfully simulated. The testbench verified the swapping operation, showing that the values of three input numbers (a, b, and c) were swapped correctly without the use of temporary variables. This experiment demonstrated the effectiveness of Verilog in implementing logical operations and control mechanisms such as swapping values. The simulation results confirm the correct functionality of the design.
